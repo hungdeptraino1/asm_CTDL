@@ -12,36 +12,32 @@ public class Main {
     public static void main (String args[]){
         
         while(true){
-            System.out.println("\nMenu \n0: Student information \n1: Add Student \n2: Edit Student \n3: Delete Student \n4: Sort Student \n5: Search Student \n6: Exit");
+            System.out.println("\nMenu\n-_________- \n0: Student information \n1: Add Student \n2: Edit Student \n3: Delete Student \n4: Sort Student \n5: Search Student \n6: Exit \n-_________-");
             System.out.print("Enter your choice: ");
             int input = sc.nextInt();
-            if (input == 0){
+            switch (input){
+                case 0:
                 viewStudent();
-            }
-            else if (input == 1){
-                addStudent();               
-            }
-            else if (input == 2){
+                break;
+                case 1:
+                addStudent();
+                break;
+                case 2:
                 editStudent();
-                
-            }
-            else if (input == 3){
+                break;
+                case 3:
                 deleteStudent();
-                
-            }
-            else if (input == 4){
+                break;
+                case 4:
                 sortStudent();
-                
-            }
-            else if (input == 5){
+                break;
+                case 5:
                 searchStudent();
-                
-            }
-            else if (input == 6){
+                break;
+                case 6:
                 System.out.println("Exiting...");
-                return;
-            }
-            else{
+                System.exit(0);               
+                default:
                 System.out.println("Invalid choice");
             }
 
@@ -69,7 +65,7 @@ public class Main {
 
             boolean isDuplicated = studentlist.stream().anyMatch(student -> student.getStudentid().equals(studentId));
             if (isDuplicated) {
-                System.out.print("Student ID already exists. Please enter a different ID: ");
+                System.out.print("Student ID already exists. Please enter a different ID.");
                 i--;
                 continue;
             }
@@ -97,7 +93,7 @@ public class Main {
                 }
 
             }
-                   
+            System.out.println("-_________-");    
             Student student = new Student(studentId, studentName, studentMarks);
             studentlist.add(student);
         }
@@ -106,6 +102,7 @@ public class Main {
 
     public static void deleteStudent(){
         viewStudent();
+        System.out.println("-_________-");
         sc.nextLine();
         System.out.print("Enter Student Id to delete: ");
         String studentId = sc.nextLine();
@@ -135,17 +132,18 @@ public class Main {
     public static void searchStudent(){
         
         sc.nextLine();
+        System.out.println("-_________-");
         System.out.print("Enter Student Id to search: ");
         String studentId = sc.nextLine();
-
+        
         for (Student student : studentlist) {
             if (student.getStudentid().equals(studentId)) {
-                System.out.println("Student found:");
-                System.out.println("Id: "+ student.getStudentid() + "Name: " + student.getName() + ", Marks: " + student.getMarks());
+                System.out.println("Student found:");                
+                System.out.println("Id: "+ student.getStudentid() + "\nName: " + student.getName() + "\nMarks: " + student.getMarks());
                 return;
             }
             else{
-                System.out.println("Student not found");
+                System.out.println("Student not found.");
             }          
         }       
     }
