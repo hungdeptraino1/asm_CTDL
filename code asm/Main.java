@@ -1,7 +1,7 @@
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Comparator;
+//import java.util.Comparator;
 import java.util.Iterator;
 
 public class Main {
@@ -122,12 +122,35 @@ public class Main {
 
 
     public static void sortStudent(){
-        studentlist.sort(Comparator.comparingDouble(Student::getMarks));
+        
+        int n = studentlist.size();
+        boolean swapped = false;
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+            for (int j = 0; j < n - i - 1; j++){
+                if (studentlist.get(j).getMarks() >  studentlist.get(j + 1).getMarks()){
+                    Student temp = studentlist.get(j);
+                    studentlist.set(j, studentlist.get(j + 1));
+                    studentlist.set(j + 1, temp);
+                    swapped = true;
+                    
+                }
+            }
+            if (!swapped){
+                break;
+            }
+        }
+        for(int i = 0; i < studentlist.size(); i ++ ){
+            studentlist.get(i).setSudentRank(i + 1);
+            studentlist.get(i).calRank();
+        }
+
         System.out.println("Students sorted by marks.");
         for (Student student : studentlist) {
-            System.out.println("Student ID: " + student.getStudentid() + ", Name: " + student.getName() + ", Marks: " + student.getMarks());
+            System.out.println("Student ID: " + student.getStudentid() + ", Name: " + student.getName() + ", Marks: " + student.getMarks() + ", Rank: " + student.getStudentRank());
         }
     }
+
 
     public static void searchStudent(){
         
@@ -197,12 +220,9 @@ public class Main {
             System.out.println("Student Name: " + student.getName());
             System.out.println("Student Marks: " + student.getMarks());
             student.calRank();
+            System.out.println("-_________-");
         }
 
     }
            
 }
-
-        
-
-
